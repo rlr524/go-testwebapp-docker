@@ -2,14 +2,15 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
 	"strconv"
+
+	"github.com/astaxie/beego"
 )
 
 func main() {
 	/* This would match the route like the following:
-		/sum/3/5
-		/product/6/23
+	/sum/3/5
+	/product/6/23
 	*/
 	beego.Router("/:operation/:num1:int/:num2:int", &mainController{})
 	beego.Run()
@@ -24,13 +25,13 @@ func (c *mainController) Get() {
 	operation := c.Ctx.Input.Param(":operation")
 	num1, _ := strconv.Atoi(c.Ctx.Input.Param(":num1"))
 	num2, _ := strconv.Atoi(c.Ctx.Input.Param(":num2"))
-	
+
 	//Set the values for use in the template
-	c.Data["operation"] = operation
+	c.Data["operation"] = "real " + operation
 	c.Data["num1"] = num1
 	c.Data["num2"] = num2
 	c.TplName = "result.gohtml"
-	
+
 	// Perform the calculation depending on the "operation" route param
 	switch operation {
 	case "sum":
