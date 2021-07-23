@@ -16,3 +16,6 @@ vendor/
 
 # Build artifact
 src/mathapp
+
+#VSCode
+*.code-workspace
