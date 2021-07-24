@@ -2,9 +2,8 @@
 package main
 
 import (
-	"strconv"
-
 	"github.com/astaxie/beego"
+	"strconv"
 )
 
 func main() {
