@@ -1,0 +1,19 @@
+version: v1.0
+name: Pipeline 2
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - echo "$DOCKER_PASSWORD" | docker login  --username "$DOCKER_USERNAME" --password-stdin
+            - 'docker pull $DOCKER_USERNAME/mathapp-production:latest'
+            - 'docker build -f Dockerfile.production --cache-from $DOCKER_USERNAME/mathapp-production:latest -t $DOCKER_USERNAME/mathapp-production:latest .'
+            - 'docker push $DOCKER_USERNAME/mathapp-production:latest'
+      secrets:
+        - name: dockerhub
